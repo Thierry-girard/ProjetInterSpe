@@ -2,5 +2,5 @@
 
 void Animation::update()
 {
-	angle += angle_incr;
+
 }

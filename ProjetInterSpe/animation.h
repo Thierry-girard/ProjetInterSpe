@@ -9,16 +9,13 @@ class Animation
 {
 private:
     double angle;
-	double angle_incr;
-    Vector rot_vect;
+    Rotation rot_vect;
 
 public:
-	Animation(double agl = 0.0, double aglinc = PI / 12, Vector vect = Vector(1.0, 0.0, 0.0)) { angle = agl; rot_vect = vect; angle_incr = aglinc; }
+	Animation(double agl = 0.0, Rotation vect = Rotation(1, 0, 0)) { angle = agl; rot_vect = vect; }
     const double getAngle() {return angle;}
     void setAngle(double agl) {angle = agl;}
-	/*const double getAngleIncr() { return angle_incr; }
-	void setAngleIncr(double aglinc) { angle_incr = aglinc; }*/
-    const Vector getRotVect() {return rot_vect;}
-    void setRotVect(Vector vect) {rot_vect = vect;}
+    const Rotation getRotVect() {return rot_vect;}
+    void setRotVect(Rotation vect) {rot_vect = vect;}
     void update();
 };

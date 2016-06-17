@@ -13,8 +13,8 @@
 
 using namespace std;
 
-int rotate_x = 0;
-int rotate_y = 0;
+int rotate_x = 45;
+int rotate_y = 15;
 float rotate_0 = 0;
 float rotate_1 = 0;
 
@@ -191,7 +191,7 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 	glEnable(GL_DEPTH_TEST);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	glScaled(0.5, 0.5, 0.5);
+	glScaled(1, 1, 1);
 
 	glRotated(rotate_x, 1, 0, 0);
 	glRotated(rotate_y, 0, 1, 0);
@@ -205,63 +205,63 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 
 		// Front
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 		
 		// Back
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 
 		// Top
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 
 		// Bot
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Left
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Right
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 1, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
     }
     glEnd();
 
@@ -272,63 +272,63 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 
 		// Front
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Back
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 
 		// Top
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 
 		// Bot
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Left
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Right
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 	}
 	glEnd();
 
@@ -339,63 +339,63 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 
 		// Front
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Back
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 
 		// Top
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 
 		// Bot
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Left
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Right
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 	}
 	glEnd();
 
@@ -406,63 +406,63 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 
 		// Front
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Back
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 
 		// Top
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 
 		// Bot
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Left
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Right
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 	}
 	glEnd();
 
@@ -473,63 +473,63 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 
 		// Front
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Back
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 
 		// Top
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 
 		// Bot
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Left
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p1.z);
+		glVertex3d(p1.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p1.y, p2.z);
+		glVertex3d(p1.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p2.z);
+		glVertex3d(p1.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p1.x, p2.y, p1.z);
+		glVertex3d(p1.x, p2.y, p1.z);
 
 		// Right
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p1.z);
+		glVertex3d(p2.x, p1.y, p1.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p1.y, p2.z);
+		glVertex3d(p2.x, p1.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p2.z);
+		glVertex3d(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
-		glVertex3i(p2.x, p2.y, p1.z);
+		glVertex3d(p2.x, p2.y, p1.z);
     }
 	glEnd();
     glPopMatrix(); // Restore the camera viewing point for next object
@@ -583,7 +583,7 @@ int main(int argc, char* args[])
         SDL_Event event;
 
         // Camera position
-        Point camera_position(0, 0.0, 200.0);
+        Point camera_position(0, 0, 200);
 
         // The forms to render
         Form* forms_list[MAX_FORMS_NUMBER];

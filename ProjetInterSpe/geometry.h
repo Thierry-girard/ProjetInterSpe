@@ -1,6 +1,7 @@
 #pragma once
 
 #include "math.h"
+#include "settings.h"
 
 class Coordinates
 {
@@ -25,6 +26,8 @@ class Vector : public Coordinates
 public:
     // Instantiates a Vector from its coordinates
     Vector(double xx, double yy, double zz) : Coordinates(xx, yy, zz) {}
+	// Or without Y
+	Vector(double xx, double zz) : Coordinates(xx, 0, zz) {}
     // Or with two points
 	Vector(Point p1, Point p2);
 	// Or default
