@@ -78,7 +78,7 @@ bool Ball::isWhite() {
 void Ball::render() {
 	glPushMatrix();
 
-	quad = gluNewQuadric();
+	GLUquadric* quad = gluNewQuadric();
 
 	glRotated(anim.getAngle(), anim.getRotVect().x, anim.getRotVect().y, anim.getRotVect().z);
 	glTranslated(center.x, center.y, center.z);
