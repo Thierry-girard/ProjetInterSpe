@@ -78,9 +78,14 @@ bool Ball::isWhite() {
 void Ball::render() {
 	glPushMatrix();
 
+	quad = gluNewQuadric();
+
+	glRotated(anim.getAngle(), anim.getRotVect().x, anim.getRotVect().y, anim.getRotVect().z);
 	glTranslated(center.x, center.y, center.z);
 	glColor3d(color.r, color.g, color.b);
-	gluSphere(gluNewQuadric(), radius, 50, 50);
+	gluSphere(quad, radius, 50, 50);
+
+	gluDeleteQuadric(quad);
 
 	glPopMatrix();
 }
