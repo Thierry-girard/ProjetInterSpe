@@ -2,7 +2,7 @@
 #include <iostream>
 #include <cmath>
 
-// Charge les paramètres
+// Charge les paramètres de base
 #include "settings.h"
 
 // Module for space geometry
