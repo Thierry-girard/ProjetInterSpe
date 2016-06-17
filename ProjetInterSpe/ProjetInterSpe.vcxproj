@@ -155,7 +155,7 @@
     <ClCompile Include="forms.cpp" />
     <ClCompile Include="geometry.cpp" />
     <ClCompile Include="hole.cpp" />
-    <ClCompile Include="premier_prog.cpp" />
+    <ClCompile Include="main.cpp" />
     <ClCompile Include="table.cpp" />
   </ItemGroup>
   <ItemGroup>
