@@ -335,6 +335,7 @@ int main(int argc, char* args[])
 		forms_list[4] = new Sphere(Point(227, 0, 0), 0.003 * scale, Color(1, 0.5, 0.25));
 		forms_list[4]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
 		forms_list[5] = new Sphere(Point(778, 0, 0), 0.07 * scale, Color(1, 1, 0.5));
+		// ok
 		forms_list[5]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
 		forms_list[6] = new Sphere(Point(1429, 0, 0), 0.06 * scale, Color(1, 1, 0.25));
 		forms_list[6]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
