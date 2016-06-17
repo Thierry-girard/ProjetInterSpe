@@ -530,7 +530,7 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 		glVertex3i(p2.x, p2.y, p2.z);
 		glColor3f(0, 0.5, 0);
 		glVertex3i(p2.x, p2.y, p1.z);
-	}
+    }
 	glEnd();
     glPopMatrix(); // Restore the camera viewing point for next object
 
@@ -595,6 +595,24 @@ int main(int argc, char* args[])
         }
         // Create here specific forms and add them to the list...
         // Don't forget to update the actual number_of_forms !
+		forms_list[0] = new Sphere(Point(0, 0, 0), 21, Color(1, 0.5, 0));
+		forms_list[0]->setAnim(Animation(0, 0.5, Vector(1, 0, 0)));
+		forms_list[1] = new Sphere(Point(57, 0, 0), 0.002 * scale, Color(1, 0, 0));
+		forms_list[1]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
+		forms_list[2] = new Sphere(Point(108, 0, 0), 0.006 * scale, Color(1, 0.5, 0));
+		forms_list[2]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
+		forms_list[3] = new Sphere(Point(150, 0, 0), 0.006 * scale, Color(0, 0.25, 1));
+		forms_list[3]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
+		forms_list[4] = new Sphere(Point(227, 0, 0), 0.003 * scale, Color(1, 0.5, 0.25));
+		forms_list[4]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
+		forms_list[5] = new Sphere(Point(778, 0, 0), 0.07 * scale, Color(1, 1, 0.5));
+		forms_list[5]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
+		forms_list[6] = new Sphere(Point(1429, 0, 0), 0.06 * scale, Color(1, 1, 0.25));
+		forms_list[6]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
+		forms_list[7] = new Sphere(Point(2877, 0, 0), 0.025 * scale, Color(0.75, 0.75, 1));
+		forms_list[7]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
+		forms_list[8] = new Sphere(Point(4498, 0, 0), 0.024 * scale, Color(0, 0, 1));
+		forms_list[8]->setAnim(Animation(0, 0.5, Vector(0, 1, 0)));
 
         // Get first "current time"
         previous_time = SDL_GetTicks();
