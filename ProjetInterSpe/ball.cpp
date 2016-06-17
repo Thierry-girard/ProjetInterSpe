@@ -2,9 +2,26 @@
 
 
 
-Ball::Ball()
+Ball::Ball(Point c, double r, Color cl)
 {
+    position = c;
+    taille = r;
+    col = cl;
+}
 
+
+void Ball::render()
+{
+    GLUquadric *quad;
+
+    quad = gluNewQuadric();
+
+	glRotated(anim.getAngle(), anim.getRotVect().x, anim.getRotVect().y, anim.getRotVect().z);
+	glTranslated(position.x, position.y, position.z);
+	glColor3f(col.r, col.g, col.b);
+	gluSphere(quad, taille, 10, 10);
+
+    gluDeleteQuadric(quad);
 }
 
 

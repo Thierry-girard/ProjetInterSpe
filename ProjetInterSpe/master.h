@@ -18,13 +18,15 @@ protected:
 private:
 };
 
-class Ball
+class Ball : public Form
 {
 public:
 	Rotation rotation;
 	Vector shift;
-	Ball();
+	double taille;
+	Ball(Point c, double r, Color cl);
 	~Ball();
+	void render();
 	void setPosition(Point p);
 	Point getPosition();
 	void setRotation(Rotation r);

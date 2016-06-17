@@ -9,6 +9,7 @@
 #include "geometry.h"
 // Module for generating and rendering forms
 #include "forms.h"
+#include "master.h"
 
 
 using namespace std;
@@ -212,7 +213,7 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 		glVertex3d(p2.x, p2.y, p1.z);
 		glColor3f(0, 1, 0);
 		glVertex3d(p1.x, p2.y, p1.z);
-		
+
 		// Back
 		glColor3f(0, 1, 0);
 		glVertex3d(p1.x, p1.y, p2.z);
@@ -595,6 +596,8 @@ int main(int argc, char* args[])
         }
         // Create here specific forms and add them to the list...
         // Don't forget to update the actual number_of_forms !
+        forms_list[0] = new Ball(Point(0, 0, 0), 21, Color(1, 0.5, 0));
+
 
         // Get first "current time"
         previous_time = SDL_GetTicks();
