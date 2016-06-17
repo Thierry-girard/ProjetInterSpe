@@ -14,6 +14,12 @@ Cue::~Cue()
 }
 
 
+void Cue::render()
+{
+
+}
+
+
 void Cue::setColor(Color c) {
 
 }

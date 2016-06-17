@@ -28,7 +28,8 @@ protected:
     Color col;
     Animation anim;
 public:
-    Animation& getAnim() {return anim;}
+	Form() {}
+	Animation& getAnim() {return anim;}
     void setAnim(Animation ani) {anim = ani;}
     // Virtual method : Form is a generic type, no rendering is possible
     virtual void render() = 0;
@@ -38,7 +39,7 @@ public:
 // A particular Form
 class Sphere : public Form
 {
-private:
+protected:
 	Point center;
 	double radius;
 public:

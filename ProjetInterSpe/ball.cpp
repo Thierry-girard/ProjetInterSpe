@@ -2,25 +2,16 @@
 
 
 
-Ball::Ball()
-{
-
+Ball::Ball(int n, Color c, Point p) {
+	number = n;
+	color = c;
+	center = p;
+	radius = 3;
 }
 
 
 Ball::~Ball() {
 
-}
-
-
-void Ball::setPosition(Point p) {
-	position = p;
-}
-
-
-
-Point Ball::getPosition() {
-	return position;
 }
 
 
@@ -81,6 +72,17 @@ bool Ball::isWhite() {
 	if (getNumber() == 0)
 		return true;
 	return false;
+}
+
+
+void Ball::render() {
+	glPushMatrix();
+
+	glTranslated(center.x, center.y, center.z);
+	glColor3d(color.r, color.g, color.b);
+	gluSphere(gluNewQuadric(), radius, 50, 50);
+
+	glPopMatrix();
 }
 
 

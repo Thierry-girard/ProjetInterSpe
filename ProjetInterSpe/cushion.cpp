@@ -48,3 +48,6 @@ float Cushion::getAbsCoeff() {
 }
 
 
+void Cushion::render() {
+
+}

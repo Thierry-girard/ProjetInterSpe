@@ -3,13 +3,14 @@
 #include "animation.h"
 #include "forms.h"
 
-class Cue
+class Cue : public Form
 {
 public:
 	Point position;
 	Rotation rotation;
 	Cue();
 	~Cue();
+	void render();
 protected:
 	Color color;
 	// Texture texture;
@@ -18,15 +19,13 @@ protected:
 private:
 };
 
-class Ball
+class Ball : public Sphere
 {
 public:
 	Rotation rotation;
 	Vector shift;
-	Ball();
+	Ball(int number, Color color, Point position);
 	~Ball();
-	void setPosition(Point p);
-	Point getPosition();
 	void setRotation(Rotation r);
 	Rotation getRotation();
 	void setShift(Vector s);
@@ -36,10 +35,10 @@ public:
 	int getNumber();
 	int getTeam();
 	bool isWhite();
+	void render();
 protected:
 	Color color;
 	// Texture texture;
-	Point position;
 	int mass;
 	int number;
 	void setColor(Color c);
@@ -48,16 +47,17 @@ protected:
 private:
 };
 
-class Hole
+class Hole : public Form
 {
 public:
 	Point center;
 	float radius;
 	Hole();
 	~Hole();
+	void render();
 };
 
-class Cushion
+class Cushion : public Form
 {
 public:
 	Cushion();
@@ -68,6 +68,7 @@ public:
 	Point getPosition();
 	void setAbsCoeff(float c);
 	float getAbsCoeff();
+	void render();
 protected:
 	float absorption_coeff;
 	Point position;
@@ -75,37 +76,42 @@ protected:
 private:
 };
 
-class Table
+class Table : public Form
 {
 public:
 	Table();
+	Table(Point p, Size s);
 	~Table();
 	void setFrictionCoeff(float c);
 	float getFricCoeff();
 	void setSize(Size s);
 	Size getSize();
 	void setCue();
-	void getCue();
+	Cue getCue();
 	void addBall(Ball b);
 	void removeBall(Ball b);
 	void clearBalls();
-	Ball* getBalls();
+	Ball** getBalls();
 	void addCushion(Cushion c);
 	void clearCushions();
-	Cushion* getCushions();
+	Cushion** getCushions();
 	void addHole(Hole h);
 	void clearHoles();
-	Hole* getHole();
+	Hole** getHole();
 	void render();
 protected:
+	const static unsigned short NB_OF_BALLS = 16;
+	const static unsigned short NB_OF_CUSHIONS = 6;
+	const static unsigned short NB_OF_HOLES = 6;
 	float friction_coeff;
 	Size size;
-	Cue* cue;
-	Ball* balls;
-	Cushion* cushions;
-	Hole* holes;
-	void setBalls(Ball* b);
-	void setCushions(Cushion* c);
-	void setHoles(Hole* h);
+	Point position;
+	Cue cue;
+	Ball* balls[NB_OF_BALLS];
+	Cushion* cushions[NB_OF_CUSHIONS];
+	Hole* holes[NB_OF_HOLES];
+	void setBalls(Ball* b[NB_OF_BALLS]);
+	void setCushions(Cushion* c[NB_OF_CUSHIONS]);
+	void setHoles(Hole* h[NB_OF_HOLES]);
 private:
 };

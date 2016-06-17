@@ -12,3 +12,8 @@ Hole::~Hole()
 {
 
 }
+
+
+void Hole::render() {
+
+}
