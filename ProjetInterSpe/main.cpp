@@ -42,10 +42,10 @@ bool init(SDL_Window** window, SDL_GLContext* context);
 bool initGL();
 
 // Updating forms for animation
-void update(Form* formlist[MAX_FORMS_NUMBER]);
+void update(Table *);
 
 // Renders scene to the screen
-const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos);
+const void render(Table *, const Point &cam_pos);
 
 // Frees media and shuts down SDL
 void close(SDL_Window** window);
@@ -146,18 +146,16 @@ bool initGL()
     return success;
 }
 
-void update(Form* formlist[MAX_FORMS_NUMBER])
+void update(Table * Table_Element)
 {
-    // Update the list of forms
-    unsigned short i = 0;
-    while(formlist[i] != NULL)
-    {
-        formlist[i]->update();
-        i++;
+    // Update the table
+    if (Table_Element != NULL) {
+        Table_Element->update();
+
     }
 }
 
-const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
+const void render(Table * Table_Element, const Point &cam_pos)
 {
     // Clear color buffer and Z-Buffer
     glClear(GL_COLOR_BUFFER_BIT);
@@ -198,14 +196,12 @@ const void render(Form* formlist[MAX_FORMS_NUMBER], const Point &cam_pos)
 	glRotated(rotate_y, 0, 1, 0);
 	glTranslated(- WIDTH_TABLE / 2, 0, - LENGTH_TABLE / 2);
 
-    // Render the list of forms
-    unsigned short i = 0;
-    while(formlist[i] != NULL)
-    {
+    // Render the table
+
+    if (Table_Element != NULL) {
         glPushMatrix(); // Preserve the camera viewing point for further forms
-        formlist[i]->render();
+        Table_Element->render();
         glPopMatrix(); // Restore the camera viewing point for next object
-        i++;
     }
 }
 
@@ -249,17 +245,8 @@ int main(int argc, char* args[])
         // Camera position
         Point camera_position(0, 0, 2 * LENGTH_TABLE);
 
-        // The forms to render
-        Form* forms_list[MAX_FORMS_NUMBER];
-        unsigned short number_of_forms = 0, i;
-        forms_list[number_of_forms] = NULL; // Do nothing but remove a warning
-        for (i=0; i<MAX_FORMS_NUMBER; i++)
-        {
-            forms_list[i] = NULL;
-        }
-        // Create here specific forms and add them to the list...
-        // Don't forget to update the actual number_of_forms !
-		forms_list[0] = new Table(Point(0, -1, 0), Size(WIDTH_TABLE, 1, LENGTH_TABLE));
+        // Create the Table
+		Table * Table_Element = new Table(Point(0, -1, 0), Size(WIDTH_TABLE, 1, LENGTH_TABLE));
 
         // Get first "current time"
         previous_time = SDL_GetTicks();
@@ -315,11 +302,11 @@ int main(int argc, char* args[])
             if ((current_time - previous_time) > ANIM_DELAY)
             {
                 previous_time = current_time;
-                update(forms_list);
+                update(Table_Element);
             }
 
             // Render the scene
-            render(forms_list, camera_position);
+            render(Table_Element, camera_position);
 
             // Update window screen
             SDL_GL_SwapWindow(gWindow);
