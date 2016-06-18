@@ -541,7 +541,7 @@ void Table::update() { // calcul des éléments physiques
             for (j = 0; j < NB_OF_HOLES; j++) {
                 if (holes[j] != NULL) {
                     if (ComputeDistance(holes[j]->position, balls[i]->position) < balls[i]->getRadius()) {
-                        removeBall(balls[i]);
+                        //removeBall(balls[i]);
                     }
                 }
             }
