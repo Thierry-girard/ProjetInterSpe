@@ -1,6 +1,6 @@
 #include "master.h"
-#include "fct.h"
 
+#include <stdio.h>
 
 
 Table::Table() : Table(Point(0, -1, 0), Size(100, 0, 190)) {
@@ -68,7 +68,7 @@ Table::Table(Point p, Size s) {
 		balls[i] = new Ball(i, c, p_ball);
 	}
 
-	balls[0]->setShift(Vector(1, 0, 0.5));
+	balls[0]->setShift(Vector(1, 0, 1));
 
 	for (i = 0; i < NB_OF_CUSHIONS; i++)
 	{
@@ -542,12 +542,25 @@ void Table::update() { // calcul des éléments physiques
             // Verification position Ball & Trous
             for (j = 0; j < NB_OF_HOLES; j++) {
                 if (holes[j] != NULL) {
-                    if (ComputeDistance(holes[j]->position, balls[i]->position) < balls[i]->getRadius()) {
+                    if (distance(holes[j]->position, balls[i]->position) < balls[i]->getRadius()) {
                         //removeBall(balls[i]);
                     }
                 }
             }
             // --
+
+            // Gestion des rebonds balles / balles
+            	for (j = 0; j < NB_OF_BALLS; j++) {
+                    if (balls[j] != NULL && i != j) {
+                        if (distance(balls[i]->position, balls[j]->position) < 2*balls[i]->getRadius()) {
+                            // Vector_tmp = balls[i]->getShift();
+                            // balls[j]->setShift(Vector(Vector_tmp.x, 0, Vector_tmp.z));
+
+                            Vector_tmp = Vector(balls[i]->position, balls[j]->position);
+                            balls[j]->setShift(0.2*Vector_tmp);
+                        }
+                    }
+            	}
 
 
             // Gestion des rebonds balles / rebords
