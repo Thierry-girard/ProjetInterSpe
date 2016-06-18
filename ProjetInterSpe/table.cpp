@@ -68,7 +68,7 @@ Table::Table(Point p, Size s) {
 		balls[i] = new Ball(i, c, p_ball);
 	}
 
-	balls[0]->setShift(Vector(1, 0, 0));
+	balls[0]->setShift(Vector(1, 0, 0.5));
 
 	for (i = 0; i < NB_OF_CUSHIONS; i++)
 	{
@@ -527,6 +527,8 @@ void Table::update() { // calcul des éléments physiques
 	unsigned short i = 0;
 	unsigned short j = 0;
 
+	Vector Vector_tmp;
+
 	for (i = 0; i < NB_OF_BALLS; i++)
 	{
 		if (balls[i] != NULL)
@@ -545,14 +547,32 @@ void Table::update() { // calcul des éléments physiques
                     }
                 }
             }
+            // --
 
-			if (i == 0) {
-				if (balls[0]->getCenter().x + balls[0]->getRadius() > size.x)
-					balls[0]->setShift(Vector(-1, 0, 0));
-				else if (balls[0]->getCenter().x - balls[0]->getRadius() < 0)
-					balls[0]->setShift(Vector(1, 0, 0));
-				balls[0]->setCenter(Point(balls[0]->getCenter().x + balls[0]->getShift().x, balls[0]->getCenter().y, balls[0]->getCenter().z));
-			}
+
+            // Gestion des rebonds balles / rebords
+            if (balls[i]->getCenter().x + balls[i]->getRadius() > size.x) {
+                Vector_tmp = balls[i]->getShift();
+                balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
+            }
+
+            else if (balls[i]->getCenter().x - balls[i]->getRadius() < 0) {
+                Vector_tmp = balls[i]->getShift();
+                balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
+            }
+
+            else if (balls[i]->getCenter().z + balls[i]->getRadius() > size.z) {
+                Vector_tmp = balls[i]->getShift();
+                balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
+            }
+
+            else if (balls[i]->getCenter().z - balls[i]->getRadius() < 0) {
+                Vector_tmp = balls[i]->getShift();
+                balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
+            }
+            // --
+
+            balls[i]->setCenter(Point(balls[i]->getCenter().x + balls[i]->getShift().x, balls[i]->getCenter().y + balls[i]->getShift().y, balls[i]->getCenter().z + balls[i]->getShift().z));
 
 		}
 	}
