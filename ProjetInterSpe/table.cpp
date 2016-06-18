@@ -1,4 +1,5 @@
 #include "master.h"
+#include "fct.h"
 
 
 
@@ -524,6 +525,8 @@ void Table::render() { // calcul du rendu graphique
 
 void Table::update() { // calcul des éléments physiques
 	unsigned short i = 0;
+	unsigned short j = 0;
+
 	for (i = 0; i < NB_OF_BALLS; i++)
 	{
 		if (balls[i] != NULL)
@@ -534,6 +537,14 @@ void Table::update() { // calcul des éléments physiques
             // - Verifier la position de la balle par rapport aux trous.
             // - Actualiser la position & la vitesse de la balle.
 
+            // Verification position Ball & Trous
+            for (j = 0; j < NB_OF_HOLES; j++) {
+                if (holes[j] != NULL) {
+                    if (ComputeDistance(holes[j]->position, balls[i]->position) < balls[i]->getRadius()) {
+                        removeBall(balls[i]);
+                    }
+                }
+            }
 
 			if (i == 0) {
 				if (balls[0]->getCenter().x + balls[0]->getRadius() > size.x)
