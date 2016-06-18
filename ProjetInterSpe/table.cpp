@@ -242,7 +242,7 @@ void Table::render() { // calcul du rendu graphique
 		glVertex3d(position.x + size.x, position.y + size.y, position.z);
 	}
 	glEnd();
-	
+
 	glBegin(GL_QUADS); // BORD GAUCHE
 	{
 		Point p1 = Point(position.x - 5, position.y, position.z);
@@ -528,6 +528,13 @@ void Table::update() { // calcul des éléments physiques
 	{
 		if (balls[i] != NULL)
 		{
+		    // Ce qu'il faut réaliser :
+            // - Collisions entre les rebords
+            // - Collisions entre les balles
+            // - Verifier la position de la balle par rapport aux trous.
+            // - Actualiser la position & la vitesse de la balle.
+
+
 			if (i == 0) {
 				if (balls[0]->getCenter().x + balls[0]->getRadius() > size.x)
 					balls[0]->setShift(Vector(-1, 0, 0));
@@ -535,6 +542,7 @@ void Table::update() { // calcul des éléments physiques
 					balls[0]->setShift(Vector(1, 0, 0));
 				balls[0]->setCenter(Point(balls[0]->getCenter().x + balls[0]->getShift().x, balls[0]->getCenter().y, balls[0]->getCenter().z));
 			}
+
 		}
 	}
 }
