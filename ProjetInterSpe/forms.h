@@ -25,14 +25,15 @@ const Color WHITE(1.0f, 1.0f, 1.0f);
 class Form
 {
 protected:
-    Color col;
-    Animation anim;
+    Color color;
+	// Texture texture;
+	Point position;
+	Rotation rotation;
 public:
 	Form() {}
-	Animation& getAnim() {return anim;}
-    void setAnim(Animation ani) {anim = ani;}
     // Virtual method : Form is a generic type, no rendering is possible
     virtual void render() = 0;
+	virtual void update() = 0;
 };
 
 
@@ -40,12 +41,11 @@ public:
 class Sphere : public Form
 {
 protected:
-	Point center;
 	double radius;
 public:
 	Sphere(Point c = Point(), double r = 1.0, Color cl = Color());
-	const Point getCenter() { return center; }
-	void setCenter(Point c) { center = c; }
+	const Point getCenter() { return position; }
+	void setCenter(Point c) { position = c; }
 	const double getRadius() { return radius; }
 	void setRadius(double rad) { if (rad < 0)return; radius = rad; }
 	void render();

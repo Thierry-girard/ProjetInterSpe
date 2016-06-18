@@ -67,6 +67,8 @@ Table::Table(Point p, Size s) {
 		balls[i] = new Ball(i, c, p_ball);
 	}
 
+	balls[0]->setShift(Vector(1, 0, 0));
+
 	for (i = 0; i < NB_OF_CUSHIONS; i++)
 	{
 		cushions[i] = NULL;
@@ -111,7 +113,7 @@ void Table::setCue() {
 
 
 
-Cue Table::getCue() {
+Cue* Table::getCue() {
 	return cue;
 }
 
@@ -176,7 +178,7 @@ Hole** Table::getHole() {
 }
 
 
-void Table::render() {
+void Table::render() { // calcul du rendu graphique
 	glBegin(GL_QUADS); // TABLE
 	{
 		// Front
@@ -514,8 +516,25 @@ void Table::render() {
 	{
 		if (balls[i] != NULL)
 		{
-			// Code de rendu de boules
 			balls[i]->render();
+		}
+	}
+}
+
+
+void Table::update() { // calcul des éléments physiques
+	unsigned short i = 0;
+	for (i = 0; i < NB_OF_BALLS; i++)
+	{
+		if (balls[i] != NULL)
+		{
+			if (i == 0) {
+				if (balls[0]->getCenter().x + balls[0]->getRadius() > size.x)
+					balls[0]->setShift(Vector(-1, 0, 0));
+				else if (balls[0]->getCenter().x - balls[0]->getRadius() < 0)
+					balls[0]->setShift(Vector(1, 0, 0));
+				balls[0]->setCenter(Point(balls[0]->getCenter().x + balls[0]->getShift().x, balls[0]->getCenter().y, balls[0]->getCenter().z));
+			}
 		}
 	}
 }

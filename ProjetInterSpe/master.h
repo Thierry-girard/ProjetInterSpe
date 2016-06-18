@@ -6,14 +6,11 @@
 class Cue : public Form
 {
 public:
-	Point position;
-	Rotation rotation;
 	Cue();
 	~Cue();
 	void render();
+	void update();
 protected:
-	Color color;
-	// Texture texture;
 	void setColor(Color c);
 	// void setTexture(Texture);
 private:
@@ -22,7 +19,6 @@ private:
 class Ball : public Sphere
 {
 public:
-	Rotation rotation;
 	Vector shift;
 	Ball(int number, Color color, Point position);
 	~Ball();
@@ -36,9 +32,8 @@ public:
 	int getTeam();
 	bool isWhite();
 	void render();
+	void update();
 protected:
-	Color color;
-	// Texture texture;
 	int mass;
 	int number;
 	void setColor(Color c);
@@ -50,11 +45,11 @@ private:
 class Hole : public Form
 {
 public:
-	Point center;
 	float radius;
 	Hole();
 	~Hole();
 	void render();
+	void update();
 };
 
 class Cushion : public Form
@@ -69,9 +64,9 @@ public:
 	void setAbsCoeff(float c);
 	float getAbsCoeff();
 	void render();
+	void update();
 protected:
 	float absorption_coeff;
-	Point position;
 	Size size;
 private:
 };
@@ -87,7 +82,7 @@ public:
 	void setSize(Size s);
 	Size getSize();
 	void setCue();
-	Cue getCue();
+	Cue* getCue();
 	void addBall(Ball b);
 	void removeBall(Ball b);
 	void clearBalls();
@@ -99,14 +94,14 @@ public:
 	void clearHoles();
 	Hole** getHole();
 	void render();
+	void update();
 protected:
 	const static unsigned short NB_OF_BALLS = 16;
 	const static unsigned short NB_OF_CUSHIONS = 6;
 	const static unsigned short NB_OF_HOLES = 6;
 	float friction_coeff;
 	Size size;
-	Point position;
-	Cue cue;
+	Cue* cue;
 	Ball* balls[NB_OF_BALLS];
 	Cushion* cushions[NB_OF_CUSHIONS];
 	Hole* holes[NB_OF_HOLES];

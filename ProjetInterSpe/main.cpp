@@ -152,7 +152,7 @@ void update(Form* formlist[MAX_FORMS_NUMBER])
     unsigned short i = 0;
     while(formlist[i] != NULL)
     {
-        formlist[i]->getAnim().update();
+        formlist[i]->update();
         i++;
     }
 }

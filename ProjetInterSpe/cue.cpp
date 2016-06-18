@@ -20,6 +20,11 @@ void Cue::render()
 }
 
 
+void Cue::update() {
+	// This might never be called
+}
+
+
 void Cue::setColor(Color c) {
 
 }

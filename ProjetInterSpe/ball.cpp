@@ -5,7 +5,7 @@
 Ball::Ball(int n, Color c, Point p) {
 	number = n;
 	color = c;
-	center = p;
+	position = p;
 	radius = 3;
 }
 
@@ -78,16 +78,22 @@ bool Ball::isWhite() {
 void Ball::render() {
 	glPushMatrix();
 
-	GLUquadric* quad = gluNewQuadric();
+	GLUquadric *quad = gluNewQuadric();
 
-	glRotated(anim.getAngle(), anim.getRotVect().x, anim.getRotVect().y, anim.getRotVect().z);
-	glTranslated(center.x, center.y, center.z);
-	glColor3d(color.r, color.g, color.b);
-	gluSphere(quad, radius, 50, 50);
+	glRotated(rotation.x, 1, 0, 0);
+	glRotated(rotation.y, 0, 1, 0);
+	glTranslated(position.x, position.y, position.z);
+	glColor3f(color.r, color.g, color.b);
+	gluSphere(quad, radius, 10, 10);
 
 	gluDeleteQuadric(quad);
 
 	glPopMatrix();
+}
+
+
+void Ball::update() {
+	// This might never be called
 }
 
 

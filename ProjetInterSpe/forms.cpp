@@ -9,9 +9,9 @@ using namespace std;
 
 Sphere::Sphere(Point c, double r, Color cl)
 {
-    center = c;
+	position = c;
     radius = r;
-    col = cl;
+	color = cl;
 }
 
 
@@ -21,9 +21,10 @@ void Sphere::render()
 
     quad = gluNewQuadric();
 
-	glRotated(anim.getAngle(), anim.getRotVect().x, anim.getRotVect().y, anim.getRotVect().z);
-	glTranslated(center.x, center.y, center.z);
-	glColor3f(col.r, col.g, col.b);
+	glRotated(rotation.x, 1, 0, 0);
+	glRotated(rotation.y, 0, 1, 0);
+	glTranslated(position.x, position.y, position.z);
+	glColor3f(color.r, color.g, color.b);
 	gluSphere(quad, radius, 10, 10);
 
     gluDeleteQuadric(quad);
