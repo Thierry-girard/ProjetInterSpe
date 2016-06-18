@@ -4,6 +4,10 @@
 
 using namespace std;
 
+Vector operator*(double const& coeff, Vector const& a) {
+    return Vector(coeff * a.x, coeff * a.y, coeff * a.z);
+}
+
 
 Vector::Vector(Point p1, Point p2)
 {
@@ -26,4 +30,12 @@ double distance(Point p1, Point p2)
 {
     Vector vect(p1, p2);
     return vect.norm();
+}
+
+double ComputeDistance(Point A, Point B) {
+    return sqrt((B.x - A.x)*(B.x - A.x) + (B.y - A.y)*(B.y - A.y) + (B.z - A.z)*(B.z - A.z));
+}
+
+Vector GetVector(Point A, Point B) {
+    return Vector(B.x - A.x, B.y - A.y, B.z - A.z);;
 }

@@ -60,3 +60,4 @@ public:
 
 // Compute the distance between two points
 double distance(Point p1, Point p2);
+Vector operator*(double const& coeff, Vector const& a);
