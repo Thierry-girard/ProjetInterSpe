@@ -75,6 +75,7 @@ Table::Table(Point p, Size s) {
 		cushions[i] = NULL;
 	}
 
+
 	for (i = 0; i < NB_OF_HOLES; i++)
 	{
 		holes[i] = NULL;
@@ -197,6 +198,23 @@ Cushion** Table::getCushions() {
 
 void Table::addHole(Hole h) {
 
+}
+
+void Table::addHole(Point P, float radius) {
+	unsigned int i = 0;
+	bool stop = false;
+
+	for (i = 0; i < NB_OF_HOLES && stop == false; i++) {
+		if (holes[i] == NULL) {
+
+			holes[i] = new Hole;
+
+			holes[i]->position = P;
+			holes[i]->radius = radius;
+
+			stop = true;
+		}
+	}
 }
 
 
@@ -576,7 +594,7 @@ void Table::update() { // calcul des éléments physiques
             for (j = 0; j < NB_OF_HOLES; j++) {
                 if (holes[j] != NULL) {
                     if (distance(holes[j]->position, balls[i]->position) < balls[i]->getRadius()) {
-                        //removeBall(balls[i]);
+						//removeBall(balls[i]);
                     }
                 }
             }
@@ -640,5 +658,3 @@ void Table::setCushions(Cushion* cushions[NB_OF_CUSHIONS]) {
 void Table::setHoles(Hole* halls[NB_OF_HOLES]) {
 
 }
-
-
