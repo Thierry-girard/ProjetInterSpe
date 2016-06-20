@@ -216,7 +216,7 @@ void Table::addHole(Hole h) {
 
 }
 
-void Table::addHole(Point P, float radius) {
+void Table::addHole(Point P, double radius) {
 	unsigned int i = 0;
 	bool stop = false;
 
@@ -633,22 +633,22 @@ void Table::update() { // calcul des éléments physiques
 
 
             // Gestion des rebonds balles / rebords
-            if (balls[i]->getPosition().x + balls[i]->getRadius() > size.x) {
+            if (balls[i]->getPosition().x + balls[i]->getRadius() > size.x && balls[i]->getShift().x > 0) {
                 Vector_tmp = balls[i]->getShift();
                 balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
             }
 
-            else if (balls[i]->getPosition().x - balls[i]->getRadius() < 0) {
+            else if (balls[i]->getPosition().x - balls[i]->getRadius() < 0 && balls[i]->getShift().x < 0) {
                 Vector_tmp = balls[i]->getShift();
                 balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
             }
 
-            else if (balls[i]->getPosition().z + balls[i]->getRadius() > size.z) {
+            else if (balls[i]->getPosition().z + balls[i]->getRadius() > size.z && balls[i]->getShift().z > 0) {
                 Vector_tmp = balls[i]->getShift();
                 balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
             }
 
-            else if (balls[i]->getPosition().z - balls[i]->getRadius() < 0) {
+            else if (balls[i]->getPosition().z - balls[i]->getRadius() < 0 && balls[i]->getShift().z < 0) {
                 Vector_tmp = balls[i]->getShift();
                 balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
             }

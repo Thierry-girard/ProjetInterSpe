@@ -52,7 +52,7 @@ class Hole : public Form
 {
 public:
 	Point position;
-	float radius;
+	double radius;
 	Hole();
 	~Hole();
 	void render();
@@ -101,7 +101,7 @@ public:
 	void clearCushions();
 	Cushion** getCushions();
 	void addHole(Hole h);
-	void addHole(Point P, float radius);
+	void addHole(Point P, double radius);
 	void clearHoles();
 	Hole** getHole();
 	void render();
