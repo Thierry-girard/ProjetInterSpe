@@ -99,6 +99,7 @@ public:
 	void clearCushions();
 	Cushion** getCushions();
 	void addHole(Hole h);
+	void addHole(Point P, float radius);
 	void clearHoles();
 	Hole** getHole();
 	void render();

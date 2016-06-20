@@ -92,10 +92,44 @@ Table::Table(Point p, Size s) {
 		cushions[i] = NULL;
 	}
 
+
 	for (i = 0; i < NB_OF_HOLES; i++)
 	{
 		holes[i] = NULL;
 	}
+
+	float rayon_trou;
+	float X1_trou, Z1_trou;
+	float X2_trou, Z2_trou;
+	float X3_trou, Z3_trou;
+	float X4_trou, Z4_trou;
+	float X5_trou, Z5_trou;
+	float X6_trou, Z6_trou;
+
+	rayon_trou = balls[0]->getRadius();
+
+	X1_trou = position.x;
+	Z1_trou = 0;
+	X2_trou = position.x;
+	Z2_trou = size.z/2;
+	X3_trou = position.x;
+	Z3_trou = size.z;
+
+	X4_trou = position.x+size.x;
+	Z4_trou = 0;
+    X5_trou = position.x+size.x;
+	Z5_trou = size.z/2;
+	X6_trou = position.x + size.x;
+	Z6_trou = size.z;
+
+	
+	addHole(Point(X1_trou, 0, Z1_trou), rayon_trou);
+	addHole(Point(X2_trou,0, Z2_trou), rayon_trou);
+	addHole(Point(X3_trou,0, Z3_trou), rayon_trou);
+	addHole(Point(X4_trou,0, Z4_trou), rayon_trou);
+	addHole(Point(X5_trou,0, Z5_trou), rayon_trou);
+	addHole(Point(X6_trou,0, Z6_trou), rayon_trou);
+	
 }
 
 
@@ -181,6 +215,23 @@ Cushion** Table::getCushions() {
 
 void Table::addHole(Hole h) {
 
+}
+
+void Table::addHole(Point P, float radius) {
+	unsigned int i = 0;
+	bool stop = false;
+
+	for (i = 0; i < NB_OF_HOLES && stop == false; i++) {
+		if (holes[i] == NULL) {
+
+			holes[i] = new Hole;
+
+			holes[i]->position = P;
+			holes[i]->radius = radius;
+
+			stop = true;
+		}
+	}
 }
 
 
@@ -561,7 +612,7 @@ void Table::update() { // calcul des éléments physiques
             // Verification position Ball & Trous
             for (j = 0; j < NB_OF_HOLES; j++) {
                 if (holes[j] != NULL) {
-                    if (distance(holes[j]->position, balls[i]->getPosition()) < balls[i]->getRadius()) {
+                    if (distance(holes[j]->getPosition(), balls[i]->getPosition()) < balls[i]->getRadius()) {
                         //removeBall(balls[i]);
                     }
                 }
@@ -626,5 +677,3 @@ void Table::setCushions(Cushion* cushions[NB_OF_CUSHIONS]) {
 void Table::setHoles(Hole* halls[NB_OF_HOLES]) {
 
 }
-
-
