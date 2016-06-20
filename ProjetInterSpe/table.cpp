@@ -80,8 +80,6 @@ Table::Table(Point p, Size s) {
 	{
 		holes[i] = NULL;
 	}
-
-	addHole(Point(2, 0, 2), 50);
 }
 
 
@@ -562,9 +560,7 @@ void Table::update() { // calcul des éléments physiques
             // Verification position Ball & Trous
             for (j = 0; j < NB_OF_HOLES; j++) {
                 if (holes[j] != NULL) {
-					printf("%lf\n", distance(holes[j]->position, balls[i]->position));
                     if (distance(holes[j]->position, balls[i]->position) < balls[i]->getRadius()) {
-						printf("kkkk");
 						//removeBall(balls[i]);
                     }
                 }
@@ -629,5 +625,3 @@ void Table::setCushions(Cushion* cushions[NB_OF_CUSHIONS]) {
 void Table::setHoles(Hole* halls[NB_OF_HOLES]) {
 
 }
-
-
