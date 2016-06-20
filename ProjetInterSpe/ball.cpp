@@ -2,16 +2,41 @@
 
 
 
-Ball::Ball(int n, Color c, Point p) {
+Ball::Ball(int n, Point p, GLchar* path) : Form(path)
+{
 	number = n;
-	color = c;
 	position = p;
+	rotation = Rotation(180, 0, 0);
 	radius = 3;
 }
 
 
 Ball::~Ball() {
 
+}
+
+
+
+void Ball::setPosition(Point p) {
+	position = p;
+}
+
+
+
+Point Ball::getPosition() {
+	return position;
+}
+
+
+
+void Ball::setRadius(double r) {
+	radius = r;
+}
+
+
+
+double Ball::getRadius() {
+	return radius;
 }
 
 
@@ -80,11 +105,20 @@ void Ball::render() {
 
 	GLUquadric *quad = gluNewQuadric();
 
+	glTranslated(position.x, position.y, position.z);
 	glRotated(rotation.x, 1, 0, 0);
 	glRotated(rotation.y, 0, 1, 0);
-	glTranslated(position.x, position.y, position.z);
-	glColor3f(color.r, color.g, color.b);
-	gluSphere(quad, radius, 10, 10);
+
+	if (texture != NULL) {
+		gluQuadricNormals(quad, GLU_SMOOTH);
+		gluQuadricTexture(quad, GL_TRUE);
+		glEnable(GL_TEXTURE_2D);
+		glBindTexture(GL_TEXTURE_2D, texture);
+		gluQuadricTexture(quad, GLU_TRUE);
+	}
+
+	gluSphere(quad, radius, 100, 100);
+	glDisable(GL_TEXTURE_2D);
 
 	gluDeleteQuadric(quad);
 
@@ -95,16 +129,6 @@ void Ball::render() {
 void Ball::update() {
 	// This might never be called
 }
-
-
-void Ball::setColor(Color c) {
-	color = c;
-}
-
-
-/*void Ball::setTexture(Texture t) {
-
-}*/
 
 
 void Ball::setNumber(int n) {

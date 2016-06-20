@@ -25,28 +25,13 @@ const Color WHITE(1.0f, 1.0f, 1.0f);
 class Form
 {
 public:
-    Color color;
-	// Texture texture;
-	Point position;
-	Rotation rotation;
+    //Color color;
+	GLint texture;
 public:
-	Form() {}
+	Form(GLchar* path = NULL);
     // Virtual method : Form is a generic type, no rendering is possible
     virtual void render() = 0;
 	virtual void update() = 0;
-};
-
-
-// A particular Form
-class Sphere : public Form
-{
-protected:
-	double radius;
-public:
-	Sphere(Point c = Point(), double r = 1.0, Color cl = Color());
-	const Point getCenter() { return position; }
-	void setCenter(Point c) { position = c; }
-	const double getRadius() { return radius; }
-	void setRadius(double rad) { if (rad < 0)return; radius = rad; }
-	void render();
+private:
+	GLuint LoadTexture(GLchar* path);
 };

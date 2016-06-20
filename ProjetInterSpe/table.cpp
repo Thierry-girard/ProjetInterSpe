@@ -15,42 +15,59 @@ Table::Table(Point p, Size s) {
 	unsigned short i;
 	for (i = 0; i < NB_OF_BALLS; i++)
 	{
-		Color c;
+		GLchar* path = NULL;
 		switch (i)
 		{
 		case 0:
-			c = Color(1.0f, 1.0f, 1.0f);
+			path = "../ProjetInterSpe/resources/Ball0.jpg";
 			break;
 		case 1:
-		case 9:
-			c = Color(1.0f, 0.8f, 0.0f);
+			path = "../ProjetInterSpe/resources/Ball1.jpg";
 			break;
 		case 2:
-		case 10:
-			c = Color(0.2f, 0.2f, 1.0f);
+			path = "../ProjetInterSpe/resources/Ball2.jpg";
 			break;
 		case 3:
-		case 11:
-			c = Color(1.0f, 0.2f, 0.2f);
+			path = "../ProjetInterSpe/resources/Ball3.jpg";
 			break;
 		case 4:
-		case 12:
-			c = Color(0.0f, 0.0f, 0.5f);
+			path = "../ProjetInterSpe/resources/Ball4.jpg";
 			break;
 		case 5:
-		case 13:
-			c = Color(1.0f, 0.5f, 0.0f);
+			path = "../ProjetInterSpe/resources/Ball5.jpg";
 			break;
 		case 6:
-		case 14:
-			c = Color(0.2f, 0.5f, 0.2f);
+			path = "../ProjetInterSpe/resources/Ball6.jpg";
 			break;
 		case 7:
+			path = "../ProjetInterSpe/resources/Ball7.jpg";
+			break;
+		case 8:
+			path = "../ProjetInterSpe/resources/Ball8.jpg";
+			break;
+		case 9:
+			path = "../ProjetInterSpe/resources/Ball9.jpg";
+			break;
+		case 10:
+			path = "../ProjetInterSpe/resources/Ball10.jpg";
+			break;
+		case 11:
+			path = "../ProjetInterSpe/resources/Ball11.jpg";
+			break;
+		case 12:
+			path = "../ProjetInterSpe/resources/Ball12.jpg";
+			break;
+		case 13:
+			path = "../ProjetInterSpe/resources/Ball13.jpg";
+			break;
+		case 14:
+			path = "../ProjetInterSpe/resources/Ball14.jpg";
+			break;
 		case 15:
-			c = Color(0.8f, 0.0f, 0.0f);
+			path = "../ProjetInterSpe/resources/Ball15.jpg";
 			break;
 		default:
-			c = Color(0.0f, 0.0f, 0.0f);
+			path = NULL;
 			break;
 		}
 		Point p_ball = Point(0, 3, 0);
@@ -65,7 +82,7 @@ Table::Table(Point p, Size s) {
 			else
 				p_ball = Point(80, p_ball.y, -80 + 10 * i);
 		}
-		balls[i] = new Ball(i, c, p_ball);
+		balls[i] = new Ball(i, p_ball, path);
 	}
 
 	balls[0]->setShift(Vector(1, 0, 1));
@@ -81,37 +98,37 @@ Table::Table(Point p, Size s) {
 		holes[i] = NULL;
 	}
 
-	float rayon_trou;
-	float X1_trou, Z1_trou;
-	float X2_trou, Z2_trou;
-	float X3_trou, Z3_trou;
-	float X4_trou, Z4_trou;
-	float X5_trou, Z5_trou;
-	float X6_trou, Z6_trou;
+	double rayon_trou;
+	double X1_trou, Z1_trou;
+	double X2_trou, Z2_trou;
+	double X3_trou, Z3_trou;
+	double X4_trou, Z4_trou;
+	double X5_trou, Z5_trou;
+	double X6_trou, Z6_trou;
 
 	rayon_trou = balls[0]->getRadius();
 
 	X1_trou = position.x;
 	Z1_trou = 0;
 	X2_trou = position.x;
-	Z2_trou = size.z/2;
+	Z2_trou = size.z / 2;
 	X3_trou = position.x;
 	Z3_trou = size.z;
 
-	X4_trou = position.x+size.x;
+	X4_trou = position.x + size.x;
 	Z4_trou = 0;
-    X5_trou = position.x+size.x;
-	Z5_trou = size.z/2;
+	X5_trou = position.x + size.x;
+	Z5_trou = size.z / 2;
 	X6_trou = position.x + size.x;
 	Z6_trou = size.z;
 
+
 	addHole(Point(X1_trou, 0, Z1_trou), rayon_trou);
-	addHole(Point(X2_trou,0, Z2_trou), rayon_trou);
-	addHole(Point(X3_trou,0, Z3_trou), rayon_trou);
-	addHole(Point(X4_trou,0, Z4_trou), rayon_trou);
-	addHole(Point(X5_trou,0, Z5_trou), rayon_trou);
-	addHole(Point(X6_trou,0, Z6_trou), rayon_trou);
-	
+	addHole(Point(X2_trou, 0, Z2_trou), rayon_trou);
+	addHole(Point(X3_trou, 0, Z3_trou), rayon_trou);
+	addHole(Point(X4_trou, 0, Z4_trou), rayon_trou);
+	addHole(Point(X5_trou, 0, Z5_trou), rayon_trou);
+	addHole(Point(X6_trou, 0, Z6_trou), rayon_trou);
 }
 
 
@@ -562,6 +579,8 @@ void Table::render() { // calcul du rendu graphique
 	}
 	glEnd();
 
+	glColor3d(1, 1, 1);
+
 	unsigned short i = 0;
 	for (i = 0; i < NB_OF_BALLS; i++)
 	{
@@ -592,8 +611,8 @@ void Table::update() { // calcul des éléments physiques
             // Verification position Ball & Trous
             for (j = 0; j < NB_OF_HOLES; j++) {
                 if (holes[j] != NULL) {
-                    if (distance(holes[j]->position, balls[i]->position) < balls[i]->getRadius()) {
-						//removeBall(balls[i]);
+                    if (distance(holes[j]->getPosition(), balls[i]->getPosition()) < balls[i]->getRadius()) {
+                        //removeBall(balls[i]);
                     }
                 }
             }
@@ -602,11 +621,11 @@ void Table::update() { // calcul des éléments physiques
             // Gestion des rebonds balles / balles
             	for (j = 0; j < NB_OF_BALLS; j++) {
                     if (balls[j] != NULL && i != j) {
-                        if (distance(balls[i]->position, balls[j]->position) < 2*balls[i]->getRadius()) {
+                        if (distance(balls[i]->getPosition(), balls[j]->getPosition()) < 2*balls[i]->getRadius()) {
                             // Vector_tmp = balls[i]->getShift();
                             // balls[j]->setShift(Vector(Vector_tmp.x, 0, Vector_tmp.z));
 
-                            Vector_tmp = Vector(balls[i]->position, balls[j]->position);
+                            Vector_tmp = Vector(balls[i]->getPosition(), balls[j]->getPosition());
                             balls[j]->setShift(0.2*Vector_tmp);
                         }
                     }
@@ -614,28 +633,28 @@ void Table::update() { // calcul des éléments physiques
 
 
             // Gestion des rebonds balles / rebords
-            if (balls[i]->getCenter().x + balls[i]->getRadius() > size.x) {
+            if (balls[i]->getPosition().x + balls[i]->getRadius() > size.x) {
                 Vector_tmp = balls[i]->getShift();
                 balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
             }
 
-            else if (balls[i]->getCenter().x - balls[i]->getRadius() < 0) {
+            else if (balls[i]->getPosition().x - balls[i]->getRadius() < 0) {
                 Vector_tmp = balls[i]->getShift();
                 balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
             }
 
-            else if (balls[i]->getCenter().z + balls[i]->getRadius() > size.z) {
+            else if (balls[i]->getPosition().z + balls[i]->getRadius() > size.z) {
                 Vector_tmp = balls[i]->getShift();
                 balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
             }
 
-            else if (balls[i]->getCenter().z - balls[i]->getRadius() < 0) {
+            else if (balls[i]->getPosition().z - balls[i]->getRadius() < 0) {
                 Vector_tmp = balls[i]->getShift();
                 balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
             }
             // --
 
-            balls[i]->setCenter(Point(balls[i]->getCenter().x + balls[i]->getShift().x, balls[i]->getCenter().y + balls[i]->getShift().y, balls[i]->getCenter().z + balls[i]->getShift().z));
+            balls[i]->setPosition(Point(balls[i]->getPosition().x + balls[i]->getShift().x, balls[i]->getPosition().y + balls[i]->getShift().y, balls[i]->getPosition().z + balls[i]->getShift().z));
 
 		}
 	}
