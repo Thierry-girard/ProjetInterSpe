@@ -57,6 +57,8 @@ public:
 	~Hole();
 	void render();
 	void update();
+	void setPosition(Point p);
+	Point getPosition();
 };
 
 class Cushion : public Form
