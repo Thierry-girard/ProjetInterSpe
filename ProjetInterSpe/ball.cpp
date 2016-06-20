@@ -2,29 +2,15 @@
 
 
 
-Ball::Ball(int n, Point p, GLchar* path) : Form(path)
+Ball::Ball(int n, GLchar* path) : Form(path)
 {
 	number = n;
-	position = p;
-	rotation = Rotation(180, 0, 0);
-	radius = 3;
+	radius = DEFAULT_RADIUS;
 }
 
 
 Ball::~Ball() {
 
-}
-
-
-
-void Ball::setPosition(Point p) {
-	position = p;
-}
-
-
-
-Point Ball::getPosition() {
-	return position;
 }
 
 
@@ -37,30 +23,6 @@ void Ball::setRadius(double r) {
 
 double Ball::getRadius() {
 	return radius;
-}
-
-
-
-void Ball::setRotation(Rotation r) {
-	rotation = r;
-}
-
-
-
-Rotation Ball::getRotation() {
-	return rotation;
-}
-
-
-
-void Ball::setShift(Vector s) {
-	shift = s;
-}
-
-
-
-Vector Ball::getShift() {
-	return shift;
 }
 
 
@@ -104,10 +66,13 @@ void Ball::render() {
 	glPushMatrix();
 
 	GLUquadric *quad = gluNewQuadric();
+	
+	Point p = getAnim().getPosition();
+	Rotation r = getAnim().getRotation();
 
-	glTranslated(position.x, position.y, position.z);
-	glRotated(rotation.x, 1, 0, 0);
-	glRotated(rotation.y, 0, 1, 0);
+	glTranslated(p.x, p.y, p.z);
+	glRotated(r.phi, 1, 0, 0);
+	glRotated(r.theta, 0, 1, 0);
 
 	if (texture != NULL) {
 		gluQuadricNormals(quad, GLU_SMOOTH);
@@ -126,8 +91,13 @@ void Ball::render() {
 }
 
 
-void Ball::update() {
-	// This might never be called
+void Ball::setAnim(Animation a) {
+	anim = a;
+}
+
+
+Animation Ball::getAnim() {
+	return anim;
 }
 
 

@@ -7,7 +7,8 @@ class Coordinates
 {
 public:
     double x, y, z;
-    Coordinates(double xx=0, double yy=0, double zz=0) {x=xx; y=yy; z=zz;}
+	Coordinates(double xx, double yy, double zz);
+	Coordinates();
 };
 
 
@@ -16,22 +17,22 @@ class Point : public Coordinates
 public:
 	// Instantiates a Point from its coordinates
 	// Point constructor calls the base class constructor and do nothing more
-	Point(double xx, double yy, double zz) : Coordinates(xx, yy, zz) {}
+	Point(double xx, double yy, double zz);
 	// Or default
-	Point() : Coordinates(0, 0, 0) {}
+	Point();
 };
 
 class Vector : public Coordinates
 {
 public:
     // Instantiates a Vector from its coordinates
-    Vector(double xx, double yy, double zz) : Coordinates(xx, yy, zz) {}
+	Vector(double xx, double yy, double zz);
 	// Or without Y
-	Vector(double xx, double zz) : Coordinates(xx, 0, zz) {}
+	Vector(double xx, double zz);
     // Or with two points
 	Vector(Point p1, Point p2);
 	// Or default
-	Vector() : Coordinates(0, 0, 0) {}
+	Vector();
 	// Compute the vector norm
 	double norm();
 };
@@ -40,24 +41,31 @@ class Size : public Coordinates
 {
 public:
 	// Instantiates a Size form its coordinates
-	Size(double xx, double yy, double zz) : Coordinates(xx, yy, zz) {}
+	Size(double xx, double yy, double zz);
 	// Or without Y
-	Size(double xx, double zz) : Coordinates(xx, 0, zz) {}
+	Size(double xx, double zz);
 	// Or with two points
-	Size(Point p1, Point p2) : Coordinates(p2.x - p1.x, p2.y - p1.y, p2.z - p1.z) {}
+	Size(Point p1, Point p2);
 	// Or default
-	Size() : Coordinates(0, 0, 0) {}
+	Size();
 };
 
-class Rotation : public Coordinates
+class Rotation
 {
 public:
+	double phi, theta;
 	// Instantiates a Rotation from its coordinates
-	Rotation(double xx, double yy, double zz) : Coordinates(xx, yy, zz) {}
+	Rotation(double p, double t);
 	// Or default
-	Rotation() : Coordinates(0, 0, 0) {}
+	Rotation();
 };
 
 // Compute the distance between two points
 double distance(Point p1, Point p2);
-Vector operator*(double const& coeff, Vector const& a);
+
+// Operator
+Vector operator*(double const& coeff, Vector const& v);
+Vector operator*(Vector const& v, double const& coeff);
+Vector operator+(Vector const& v1, Vector const& v2);
+Vector operator-(Vector const& v1, Vector const& v2);
+double operator*(Vector const& v1, Vector const& v2);

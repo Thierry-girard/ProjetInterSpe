@@ -52,9 +52,6 @@ const void render(Table *, const Point &cam_pos);
 // Frees media and shuts down SDL
 void close(SDL_Window** window);
 
-// Load the textures
-GLuint loadTexture(GLchar* path);
-
 
 /***************************************************************************/
 /* Functions implementations                                               */
@@ -156,7 +153,6 @@ void update(Table * Table_Element)
     // Update the table
     if (Table_Element != NULL) {
         Table_Element->update();
-
     }
 }
 

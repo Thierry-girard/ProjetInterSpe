@@ -82,10 +82,11 @@ Table::Table(Point p, Size s) {
 			else
 				p_ball = Point(80, p_ball.y, -80 + 10 * i);
 		}
-		balls[i] = new Ball(i, p_ball, path);
+		balls[i] = new Ball(i, path);
+		balls[i]->setAnim(Animation(p_ball, Vector(0, 0, 0), Vector(0, 0, 0), Rotation(0, 0)));
 	}
 
-	balls[0]->setShift(Vector(1, 0, 1));
+	balls[0]->getAnim().setVelocity(Vector(1, 0, 1));
 
 	for (i = 0; i < NB_OF_CUSHIONS; i++)
 	{
@@ -611,7 +612,7 @@ void Table::update() { // calcul des éléments physiques
             // Verification position Ball & Trous
             for (j = 0; j < NB_OF_HOLES; j++) {
                 if (holes[j] != NULL) {
-                    if (distance(holes[j]->getPosition(), balls[i]->getPosition()) < balls[i]->getRadius()) {
+                    if (distance(holes[j]->getPosition(), balls[i]->getAnim().getPosition()) < balls[i]->getRadius()) {
                         //removeBall(balls[i]);
                     }
                 }
@@ -621,40 +622,40 @@ void Table::update() { // calcul des éléments physiques
             // Gestion des rebonds balles / balles
             	for (j = 0; j < NB_OF_BALLS; j++) {
                     if (balls[j] != NULL && i != j) {
-                        if (distance(balls[i]->getPosition(), balls[j]->getPosition()) < 2*balls[i]->getRadius()) {
-                            // Vector_tmp = balls[i]->getShift();
-                            // balls[j]->setShift(Vector(Vector_tmp.x, 0, Vector_tmp.z));
+                        if (distance(balls[i]->getAnim().getPosition(), balls[j]->getAnim().getPosition()) < 2*balls[i]->getRadius()) {
+                            // Vector_tmp = balls[i]->getAnim().getVelocity();
+                            // balls[j]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, Vector_tmp.z));
 
-                            Vector_tmp = Vector(balls[i]->getPosition(), balls[j]->getPosition());
-                            balls[j]->setShift(0.2*Vector_tmp);
+                            Vector_tmp = Vector(balls[i]->getAnim().getPosition(), balls[j]->getAnim().getPosition());
+                            balls[j]->getAnim().setVelocity(0.2*Vector_tmp);
                         }
                     }
             	}
 
 
             // Gestion des rebonds balles / rebords
-            if (balls[i]->getPosition().x + balls[i]->getRadius() > size.x && balls[i]->getShift().x > 0) {
-                Vector_tmp = balls[i]->getShift();
-                balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
+            if (balls[i]->getAnim().getPosition().x + balls[i]->getRadius() > size.x && balls[i]->getAnim().getVelocity().x > 0) {
+                Vector_tmp = balls[i]->getAnim().getVelocity();
+                balls[i]->getAnim().setVelocity(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
             }
 
-            else if (balls[i]->getPosition().x - balls[i]->getRadius() < 0 && balls[i]->getShift().x < 0) {
-                Vector_tmp = balls[i]->getShift();
-                balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
+            else if (balls[i]->getAnim().getPosition().x - balls[i]->getRadius() < 0 && balls[i]->getAnim().getVelocity().x < 0) {
+                Vector_tmp = balls[i]->getAnim().getVelocity();
+                balls[i]->getAnim().setVelocity(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
             }
 
-            else if (balls[i]->getPosition().z + balls[i]->getRadius() > size.z && balls[i]->getShift().z > 0) {
-                Vector_tmp = balls[i]->getShift();
-                balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
+            else if (balls[i]->getAnim().getPosition().z + balls[i]->getRadius() > size.z && balls[i]->getAnim().getVelocity().z > 0) {
+                Vector_tmp = balls[i]->getAnim().getVelocity();
+                balls[i]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
             }
 
-            else if (balls[i]->getPosition().z - balls[i]->getRadius() < 0 && balls[i]->getShift().z < 0) {
-                Vector_tmp = balls[i]->getShift();
-                balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
+            else if (balls[i]->getAnim().getPosition().z - balls[i]->getRadius() < 0 && balls[i]->getAnim().getVelocity().z < 0) {
+                Vector_tmp = balls[i]->getAnim().getVelocity();
+                balls[i]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
             }
             // --
 
-            balls[i]->setPosition(Point(balls[i]->getPosition().x + balls[i]->getShift().x, balls[i]->getPosition().y + balls[i]->getShift().y, balls[i]->getPosition().z + balls[i]->getShift().z));
+            balls[i]->getAnim().setPosition(Point(balls[i]->getAnim().getPosition().x + balls[i]->getAnim().getVelocity().x, balls[i]->getAnim().getPosition().y + balls[i]->getAnim().getVelocity().y, balls[i]->getAnim().getPosition().z + balls[i]->getAnim().getVelocity().z));
 
 		}
 	}

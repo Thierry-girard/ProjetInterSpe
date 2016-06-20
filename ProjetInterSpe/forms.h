@@ -31,7 +31,6 @@ public:
 	Form(GLchar* path = NULL);
     // Virtual method : Form is a generic type, no rendering is possible
     virtual void render() = 0;
-	virtual void update() = 0;
 private:
 	GLuint LoadTexture(GLchar* path);
 };

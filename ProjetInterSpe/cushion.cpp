@@ -51,8 +51,3 @@ float Cushion::getAbsCoeff() {
 void Cushion::render() {
 
 }
-
-
-void Cushion::update() {
-	// This might never be called
-}
