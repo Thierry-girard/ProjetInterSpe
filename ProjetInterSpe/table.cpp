@@ -105,7 +105,6 @@ Table::Table(Point p, Size s) {
 	X6_trou = position.x + size.x;
 	Z6_trou = size.z;
 
-	
 	addHole(Point(X1_trou, 0, Z1_trou), rayon_trou);
 	addHole(Point(X2_trou,0, Z2_trou), rayon_trou);
 	addHole(Point(X3_trou,0, Z3_trou), rayon_trou);
