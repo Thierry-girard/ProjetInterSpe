@@ -11,6 +11,8 @@
 #include "forms.h"
 // Module for objects
 #include "master.h"
+// Module for textures
+#include <SDL_image.h>
 
 
 using namespace std;
@@ -49,6 +51,9 @@ const void render(Table *, const Point &cam_pos);
 
 // Frees media and shuts down SDL
 void close(SDL_Window** window);
+
+// Load the textures
+GLuint loadTexture(GLchar* path);
 
 
 /***************************************************************************/

@@ -11,17 +11,20 @@ public:
 	void render();
 	void update();
 protected:
-	void setColor(Color c);
-	// void setTexture(Texture);
+	//void setColor(Color c);
 private:
 };
 
-class Ball : public Sphere
+class Ball : public Form
 {
 public:
 	Vector shift;
-	Ball(int number, Color color, Point position);
+	Ball(int number, Point position, GLchar* path);
 	~Ball();
+	void setPosition(Point p);
+	Point getPosition();
+	void setRadius(double r);
+	double getRadius();
 	void setRotation(Rotation r);
 	Rotation getRotation();
 	void setShift(Vector s);
@@ -34,9 +37,12 @@ public:
 	void render();
 	void update();
 protected:
+	Point position;
+	double radius;
+	Rotation rotation;
 	int mass;
 	int number;
-	void setColor(Color c);
+	//void setColor(Color c);
 	//void setTexture(Texture);
 	void setNumber(int n);
 private:
@@ -45,6 +51,7 @@ private:
 class Hole : public Form
 {
 public:
+	Point position;
 	float radius;
 	Hole();
 	~Hole();
@@ -55,7 +62,7 @@ public:
 class Cushion : public Form
 {
 public:
-	Cushion();
+	Cushion(GLchar* path);
 	~Cushion();
 	void setSize(Size s);
 	Size getSize();
@@ -67,6 +74,7 @@ public:
 	void update();
 protected:
 	float absorption_coeff;
+	Point position;
 	Size size;
 private:
 };
@@ -100,6 +108,7 @@ protected:
 	const static unsigned short NB_OF_CUSHIONS = 6;
 	const static unsigned short NB_OF_HOLES = 6;
 	float friction_coeff;
+	Point position;
 	Size size;
 	Cue* cue;
 	Ball* balls[NB_OF_BALLS];

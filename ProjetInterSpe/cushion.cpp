@@ -2,7 +2,7 @@
 
 
 
-Cushion::Cushion()
+Cushion::Cushion(GLchar* path) : Form(path)
 {
 
 }
