@@ -21,10 +21,10 @@ void Hole::render() {
 
 	Point p = getPosition();
 
-	glTranslated(p.x, p.y, p.z);
+	glTranslated(p.x, p.y+1.5, p.z);
 	glColor3d(0.0, 0.0, 0.0);
-
-	gluSphere(quad, radius, 100, 100);
+	glRotated(90, 1, 0, 0);
+	gluDisk(quad,0, radius, 100, 100);
 	gluDeleteQuadric(quad);
 
 	glPopMatrix();

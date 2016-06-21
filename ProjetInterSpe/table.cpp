@@ -17,6 +17,12 @@ Table::Table(Point p, Size s) {
 		forms[i] = NULL;
 	}
 
+
+
+
+
+
+
 	for (i = 0; i < NB_OF_BALLS; i++)
 	{
 		GLchar* path = NULL;
@@ -114,7 +120,7 @@ Table::Table(Point p, Size s) {
 	double X5_trou, Z5_trou;
 	double X6_trou, Z6_trou;
 
-	rayon_trou = Ball::DEFAULT_RADIUS;
+	rayon_trou = Ball::DEFAULT_RADIUS+2;
 
 	X1_trou = position.x;
 	Z1_trou = 0;
@@ -585,6 +591,63 @@ void Table::render() { // calcul du rendu graphique
 		glVertex3d(p2.x, p2.y, p1.z);
 	}
 	glEnd();
+
+	//Ajout des pieds
+
+	glColor3d(0.52, 0.37, 0.26);
+	//pied haut gauche
+	glPushMatrix();
+		GLUquadric *quad = gluNewQuadric();
+		GLUquadric *quadp = gluNewQuadric();
+		glTranslated(position.x+9, position.y, position.z+9);
+		glRotated(90, 1, 0, 0);
+		gluCylinder(quad,9, 7, 70,100, 100);
+		glTranslated(0, 0, 70);
+		gluDisk(quadp, 0, 7, 100, 100);
+		gluDeleteQuadric(quad);
+		gluDeleteQuadric(quadp);
+	glPopMatrix();
+	//pied haut droit
+	glPushMatrix();
+		quad = gluNewQuadric();
+		quadp = gluNewQuadric();
+		glTranslated(position.x + size.x - 9, position.y, position.z + 9);
+		glRotated(90, 1, 0, 0);
+		gluCylinder(quad, 9, 7, 70, 100, 100);
+		glTranslated(0, 0, 70);
+		gluDisk(quadp, 0, 7, 100, 100);
+		gluDeleteQuadric(quad);
+		gluDeleteQuadric(quadp);
+	glPopMatrix();
+	////pied bas gauche
+	glPushMatrix();
+		quad = gluNewQuadric();
+		quadp = gluNewQuadric();
+		glTranslated(position.x + 9, position.y, position.z + size.z - 9);
+		glRotated(90, 1, 0, 0);
+		gluCylinder(quad, 9, 7, 70, 100, 100);
+		glTranslated(0, 0, 70);
+		gluDisk(quadp, 0, 7, 100, 100);
+		gluDeleteQuadric(quad);
+		gluDeleteQuadric(quadp);
+	glPopMatrix();
+	////pied bas droit
+	glPushMatrix();
+		quad = gluNewQuadric();
+		quadp = gluNewQuadric();
+		glTranslated(position.x + size.x - 9, position.y, position.z + size.z - 9);
+		glRotated(90, 1, 0, 0);
+		gluCylinder(quad, 9, 7, 70, 100, 100);
+		glTranslated(0, 0, 70);
+		gluDisk(quadp, 0, 7, 100, 100);
+		gluDeleteQuadric(quad);
+		gluDeleteQuadric(quadp);
+	glPopMatrix();
+
+	
+
+
+
 
 	glColor3d(1, 1, 1);
 

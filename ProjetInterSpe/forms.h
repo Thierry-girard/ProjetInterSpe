@@ -35,6 +35,7 @@ public:
 	void setAnim(Animation a) { anim = a; }
 	virtual void update(Form* f) = 0;
 private:
+		Animation anim;
+protected:
 	GLuint LoadTexture(GLchar* path);
-	Animation anim;
 };
