@@ -19,11 +19,6 @@ void Hole::render() {
 }
 
 
-void Hole::update() {
-	// This might never be called
-}
-
-
 void Hole::setPosition(Point p) {
 	position = p;
 }

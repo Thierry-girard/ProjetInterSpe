@@ -20,6 +20,11 @@ void Cue::render()
 }
 
 
-void Cue::update() {
-	// This might never be called
+void Cue::setAnim(Animation a) {
+	anim = a;
+}
+
+
+Animation Cue::getAnim() {
+	return anim;
 }
