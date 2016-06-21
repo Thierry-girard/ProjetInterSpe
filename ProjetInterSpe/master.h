@@ -9,56 +9,43 @@ public:
 	Cue();
 	~Cue();
 	void render();
-	void update();
+	void update(Form* h);
 protected:
-	//void setColor(Color c);
-private:
 };
 
 class Ball : public Form
 {
 public:
-	Vector shift;
-	Ball(int number, Point position, GLchar* path);
+	static const double DEFAULT_RADIUS;
+	Ball(int number, GLchar* path);
 	~Ball();
-	void setPosition(Point p);
-	Point getPosition();
 	void setRadius(double r);
 	double getRadius();
-	void setRotation(Rotation r);
-	Rotation getRotation();
-	void setShift(Vector s);
-	Vector getShift();
 	void setMass(int m);
 	int getMass();
 	int getNumber();
 	int getTeam();
 	bool isWhite();
 	void render();
-	void update();
+	void update(Form* f);
 protected:
-	Point position;
 	double radius;
-	Rotation rotation;
 	int mass;
 	int number;
-	//void setColor(Color c);
-	//void setTexture(Texture);
 	void setNumber(int n);
-private:
 };
 
 class Hole : public Form
 {
 public:
 	Point position;
-	float radius;
-	Hole();
+	double radius;
+	Hole(Point p, double r);
 	~Hole();
-	void render();
-	void update();
 	void setPosition(Point p);
 	Point getPosition();
+	void render();
+	void update(Form* h);
 };
 
 class Cushion : public Form
@@ -66,17 +53,20 @@ class Cushion : public Form
 public:
 	Cushion(GLchar* path);
 	~Cushion();
-	void setSize(Size s);
-	Size getSize();
-	void setPosition(Point p);
-	Point getPosition();
 	void setAbsCoeff(float c);
 	float getAbsCoeff();
+	void setPosition(Point p);
+	Point getPosition();
+	void setDirector(Vector d);
+	Vector getDirector();
+	void setSize(Size s);
+	Size getSize();
 	void render();
-	void update();
+	void update(Form* h);
 protected:
 	float absorption_coeff;
 	Point position;
+	Vector director;
 	Size size;
 private:
 };
@@ -91,7 +81,7 @@ public:
 	float getFricCoeff();
 	void setSize(Size s);
 	Size getSize();
-	void setCue();
+	/*void setCue();
 	Cue* getCue();
 	void addBall(Ball b);
 	void removeBall(Ball b);
@@ -101,11 +91,15 @@ public:
 	void clearCushions();
 	Cushion** getCushions();
 	void addHole(Hole h);
-	void addHole(Point P, float radius);
+	void addHole(Point P, double radius);
 	void clearHoles();
-	Hole** getHole();
+	Hole** getHole();*/
+	Form** getForms();
+	int addForm(Form* f);
+	void removeForm(Form* f);
+	void clearForms();
 	void render();
-	void update();
+	void update(Form* h);
 protected:
 	const static unsigned short NB_OF_BALLS = 16;
 	const static unsigned short NB_OF_CUSHIONS = 6;
@@ -113,10 +107,11 @@ protected:
 	float friction_coeff;
 	Point position;
 	Size size;
-	Cue* cue;
+	/*Cue* cue;
 	Ball* balls[NB_OF_BALLS];
 	Cushion* cushions[NB_OF_CUSHIONS];
-	Hole* holes[NB_OF_HOLES];
+	Hole* holes[NB_OF_HOLES];*/
+	Form* forms[50];
 	void setBalls(Ball* b[NB_OF_BALLS]);
 	void setCushions(Cushion* c[NB_OF_CUSHIONS]);
 	void setHoles(Hole* h[NB_OF_HOLES]);

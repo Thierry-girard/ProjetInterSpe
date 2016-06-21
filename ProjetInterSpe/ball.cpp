@@ -1,30 +1,20 @@
 #include "master.h"
+#include <typeinfo>
 
 
 
-Ball::Ball(int n, Point p, GLchar* path) : Form(path)
+const double Ball::DEFAULT_RADIUS = 3.0;
+
+
+Ball::Ball(int n, GLchar* path) : Form(path)
 {
 	number = n;
-	position = p;
-	rotation = Rotation(180, 0, 0);
-	radius = 3;
+	radius = DEFAULT_RADIUS;
 }
 
 
 Ball::~Ball() {
 
-}
-
-
-
-void Ball::setPosition(Point p) {
-	position = p;
-}
-
-
-
-Point Ball::getPosition() {
-	return position;
 }
 
 
@@ -37,30 +27,6 @@ void Ball::setRadius(double r) {
 
 double Ball::getRadius() {
 	return radius;
-}
-
-
-
-void Ball::setRotation(Rotation r) {
-	rotation = r;
-}
-
-
-
-Rotation Ball::getRotation() {
-	return rotation;
-}
-
-
-
-void Ball::setShift(Vector s) {
-	shift = s;
-}
-
-
-
-Vector Ball::getShift() {
-	return shift;
 }
 
 
@@ -104,10 +70,13 @@ void Ball::render() {
 	glPushMatrix();
 
 	GLUquadric *quad = gluNewQuadric();
+	
+	Point p = getAnim().getPosition();
+	Rotation r = getAnim().getRotation();
 
-	glTranslated(position.x, position.y, position.z);
-	glRotated(rotation.x, 1, 0, 0);
-	glRotated(rotation.y, 0, 1, 0);
+	glTranslated(p.x, p.y, p.z);
+	glRotated(r.phi, 1, 0, 0);
+	glRotated(r.theta, 0, 1, 0);
 
 	if (texture != NULL) {
 		gluQuadricNormals(quad, GLU_SMOOTH);
@@ -126,8 +95,58 @@ void Ball::render() {
 }
 
 
-void Ball::update() {
-	// This might never be called
+void Ball::update(Form* f) {
+	{
+		if (typeid(f) == typeid(Hole)) {
+			if (distance(f->getAnim().getPosition(), this->getAnim().getPosition()) < this->getRadius()) {
+				//removeBall(balls[i]);
+			}
+		}
+	}
+
+	{
+		Vector Vector_tmp;
+		if (typeid(f) == typeid(Ball)) {
+			if (distance(this->getAnim().getPosition(), f->getAnim().getPosition()) < 2 * this->getRadius()) {
+				// Vector_tmp = balls[i]->getAnim().getVelocity();
+				// balls[j]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, Vector_tmp.z));
+
+				Vector_tmp = Vector(this->getAnim().getPosition(), f->getAnim().getPosition());
+				f->getAnim().setVelocity(0.2*Vector_tmp);
+			}
+		}
+	}
+
+	{
+		if (typeid(f) == typeid(Cushion)) {
+			// TODO BAPTDUPR
+			/*
+			if (balls[i]->getAnim().getPosition().x + balls[i]->getRadius() > size.x && balls[i]->getAnim().getVelocity().x > 0) {
+				Vector_tmp = balls[i]->getAnim().getVelocity();
+				balls[i]->getAnim().setVelocity(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
+			}
+
+			else if (balls[i]->getAnim().getPosition().x - balls[i]->getRadius() < 0 && balls[i]->getAnim().getVelocity().x < 0) {
+				Vector_tmp = balls[i]->getAnim().getVelocity();
+				balls[i]->getAnim().setVelocity(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
+			}
+
+			else if (balls[i]->getAnim().getPosition().z + balls[i]->getRadius() > size.z && balls[i]->getAnim().getVelocity().z > 0) {
+				Vector_tmp = balls[i]->getAnim().getVelocity();
+				balls[i]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
+			}
+
+			else if (balls[i]->getAnim().getPosition().z - balls[i]->getRadius() < 0 && balls[i]->getAnim().getVelocity().z < 0) {
+				Vector_tmp = balls[i]->getAnim().getVelocity();
+				balls[i]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
+			}
+			
+			balls[i]->getAnim().setPosition(Point(balls[i]->getAnim().getPosition().x + balls[i]->getAnim().getVelocity().x, balls[i]->getAnim().getPosition().y + balls[i]->getAnim().getVelocity().y, balls[i]->getAnim().getPosition().z + balls[i]->getAnim().getVelocity().z));
+			*/
+
+			// RECOPIER DANS CUSHION::UPDATE
+		}
+	}
 }
 
 

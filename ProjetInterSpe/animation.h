@@ -8,14 +8,20 @@
 class Animation
 {
 private:
-    double angle;
-    Rotation rot_vect;
-
+	Point position;
+	Vector velocity;
+	Vector acceleration;
+	Rotation rotation;
 public:
-	Animation(double agl = 0.0, Rotation vect = Rotation(1, 0, 0)) { angle = agl; rot_vect = vect; }
-    const double getAngle() {return angle;}
-    void setAngle(double agl) {angle = agl;}
-    const Rotation getRotVect() {return rot_vect;}
-    void setRotVect(Rotation vect) {rot_vect = vect;}
-    void update();
+	Animation();
+	Animation(Point p, Vector v, Vector a, Rotation r);
+	~Animation();
+	void setPosition(Point p);
+	Point getPosition();
+	void setVelocity(Vector v);
+	Vector getVelocity();
+	void setAcceleration(Vector a);
+	Vector getAcceleration();
+	void setRotation(Rotation r);
+	Rotation getRotation();
 };

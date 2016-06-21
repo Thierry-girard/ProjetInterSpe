@@ -13,6 +13,10 @@ Table::Table(Point p, Size s) {
 	size = s;
 
 	unsigned short i;
+	for (i = 0; i < 50; i++) {
+		forms[i] = NULL;
+	}
+
 	for (i = 0; i < NB_OF_BALLS; i++)
 	{
 		GLchar* path = NULL;
@@ -82,20 +86,24 @@ Table::Table(Point p, Size s) {
 			else
 				p_ball = Point(80, p_ball.y, -80 + 10 * i);
 		}
-		balls[i] = new Ball(i, p_ball, path);
-	}
+		Ball* b = new Ball(i, path);
+		if (i != 0)
+			b->setAnim(Animation(p_ball, Vector(0, 0, 0), Vector(0, 0, 0), Rotation(0, 0)));
+		else
+			b->setAnim(Animation(p_ball, Vector(1, 0, 1), Vector(0, 0, 0), Rotation(0, 0)));
 
-	balls[0]->setShift(Vector(1, 0, 1));
+		addForm(b);
+	}
 
 	for (i = 0; i < NB_OF_CUSHIONS; i++)
 	{
-		cushions[i] = NULL;
+		// TODO
 	}
 
 
 	for (i = 0; i < NB_OF_HOLES; i++)
 	{
-		holes[i] = NULL;
+		// TODO
 	}
 
 	double rayon_trou;
@@ -106,7 +114,7 @@ Table::Table(Point p, Size s) {
 	double X5_trou, Z5_trou;
 	double X6_trou, Z6_trou;
 
-	rayon_trou = balls[0]->getRadius();
+	rayon_trou = Ball::DEFAULT_RADIUS;
 
 	X1_trou = position.x;
 	Z1_trou = 0;
@@ -122,13 +130,12 @@ Table::Table(Point p, Size s) {
 	X6_trou = position.x + size.x;
 	Z6_trou = size.z;
 
-
-	addHole(Point(X1_trou, 0, Z1_trou), rayon_trou);
-	addHole(Point(X2_trou, 0, Z2_trou), rayon_trou);
-	addHole(Point(X3_trou, 0, Z3_trou), rayon_trou);
-	addHole(Point(X4_trou, 0, Z4_trou), rayon_trou);
-	addHole(Point(X5_trou, 0, Z5_trou), rayon_trou);
-	addHole(Point(X6_trou, 0, Z6_trou), rayon_trou);
+	addForm(new Hole(Point(X1_trou, 0, Z1_trou), rayon_trou));
+	addForm(new Hole(Point(X2_trou, 0, Z2_trou), rayon_trou));
+	addForm(new Hole(Point(X3_trou, 0, Z3_trou), rayon_trou));
+	addForm(new Hole(Point(X4_trou, 0, Z4_trou), rayon_trou));
+	addForm(new Hole(Point(X5_trou, 0, Z5_trou), rayon_trou));
+	addForm(new Hole(Point(X6_trou, 0, Z6_trou), rayon_trou));
 }
 
 
@@ -158,7 +165,7 @@ Size Table::getSize() {
 
 
 
-void Table::setCue() {
+/*void Table::setCue() {
 
 }
 
@@ -212,12 +219,12 @@ Cushion** Table::getCushions() {
 
 
 
-void Table::addHole(Hole h) {
+void Table::addForm(new Hole(Hole h) {
 
 }
 
-void Table::addHole(Point P, float radius) {
-	unsigned int i = 0;
+void Table::addHole(Point P, double radius) {
+	unsigned int i = 0);
 	bool stop = false;
 
 	for (i = 0; i < NB_OF_HOLES && stop == false; i++) {
@@ -243,7 +250,7 @@ void Table::clearHoles() {
 
 Hole** Table::getHole() {
 	return holes;
-}
+}*/
 
 
 void Table::render() { // calcul du rendu graphique
@@ -582,82 +589,70 @@ void Table::render() { // calcul du rendu graphique
 	glColor3d(1, 1, 1);
 
 	unsigned short i = 0;
-	for (i = 0; i < NB_OF_BALLS; i++)
+	for (i = 0; i < 50; i++)
 	{
-		if (balls[i] != NULL)
+		if (forms[i] != NULL)
 		{
-			balls[i]->render();
+			forms[i]->render();
 		}
 	}
 }
 
 
-void Table::update() { // calcul des éléments physiques
+void Table::update(Form* h) { // calcul des éléments physiques
 	unsigned short i = 0;
 	unsigned short j = 0;
 
 	Vector Vector_tmp;
 
-	for (i = 0; i < NB_OF_BALLS; i++)
+	for (i = 0; i < 50; i++)
 	{
-		if (balls[i] != NULL)
+		if (forms[i] != NULL)
 		{
-		    // Ce qu'il faut réaliser :
-            // - Collisions entre les rebords
-            // - Collisions entre les balles
-            // - Verifier la position de la balle par rapport aux trous.
-            // - Actualiser la position & la vitesse de la balle.
+			// Ce qu'il faut réaliser :
+			// - Collisions entre les rebords
+			// - Collisions entre les balles
+			// - Verifier la position de la balle par rapport aux trous.
+			// - Actualiser la position & la vitesse de la balle.
 
-            // Verification position Ball & Trous
-            for (j = 0; j < NB_OF_HOLES; j++) {
-                if (holes[j] != NULL) {
-                    if (distance(holes[j]->getPosition(), balls[i]->getPosition()) < balls[i]->getRadius()) {
-                        //removeBall(balls[i]);
-                    }
-                }
-            }
-            // --
-
-            // Gestion des rebonds balles / balles
-            	for (j = 0; j < NB_OF_BALLS; j++) {
-                    if (balls[j] != NULL && i != j) {
-                        if (distance(balls[i]->getPosition(), balls[j]->getPosition()) < 2*balls[i]->getRadius()) {
-                            // Vector_tmp = balls[i]->getShift();
-                            // balls[j]->setShift(Vector(Vector_tmp.x, 0, Vector_tmp.z));
-
-                            Vector_tmp = Vector(balls[i]->getPosition(), balls[j]->getPosition());
-                            balls[j]->setShift(0.2*Vector_tmp);
-                        }
-                    }
-            	}
-
-
-            // Gestion des rebonds balles / rebords
-            if (balls[i]->getPosition().x + balls[i]->getRadius() > size.x) {
-                Vector_tmp = balls[i]->getShift();
-                balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
-            }
-
-            else if (balls[i]->getPosition().x - balls[i]->getRadius() < 0) {
-                Vector_tmp = balls[i]->getShift();
-                balls[i]->setShift(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
-            }
-
-            else if (balls[i]->getPosition().z + balls[i]->getRadius() > size.z) {
-                Vector_tmp = balls[i]->getShift();
-                balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
-            }
-
-            else if (balls[i]->getPosition().z - balls[i]->getRadius() < 0) {
-                Vector_tmp = balls[i]->getShift();
-                balls[i]->setShift(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
-            }
-            // --
-
-            balls[i]->setPosition(Point(balls[i]->getPosition().x + balls[i]->getShift().x, balls[i]->getPosition().y + balls[i]->getShift().y, balls[i]->getPosition().z + balls[i]->getShift().z));
-
+			// Verification position Ball & Trous
+			for (j = i + 1; j < 50; j++) {
+				if (forms[j] != NULL) {
+					forms[i]->update(forms[j]);
+				}
+			}
 		}
 	}
+}
+
+
+
+Form** Table::getForms() {
+	return forms;
+}
+
+
+int Table::addForm(Form* f) {
+	unsigned int i = 0;
+
+	for (i = 0; i < 50; i++) {
+		if (forms[i] == NULL) {
+			forms[i] = f;
+			return 0;
+		}
+	}
+
+	return -1;
+}
+
+
+void Table::removeForm(Form* f) {
+	// TODO
+}
+
+
+void Table::clearForms() {
+	// TODO
 }
 
 
