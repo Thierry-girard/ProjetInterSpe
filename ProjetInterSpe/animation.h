@@ -24,5 +24,4 @@ public:
 	Vector getAcceleration();
 	void setRotation(Rotation r);
 	Rotation getRotation();
-    void update();
 };

@@ -9,16 +9,14 @@ public:
 	Cue();
 	~Cue();
 	void render();
-	void setAnim(Animation a);
-	Animation getAnim();
+	void update(Form* h);
 protected:
-	Animation anim;
 };
 
 class Ball : public Form
 {
 public:
-	const double DEFAULT_RADIUS = 3;
+	static const double DEFAULT_RADIUS;
 	Ball(int number, GLchar* path);
 	~Ball();
 	void setRadius(double r);
@@ -29,13 +27,11 @@ public:
 	int getTeam();
 	bool isWhite();
 	void render();
-	void setAnim(Animation a);
-	Animation getAnim();
+	void update(Form* f);
 protected:
 	double radius;
 	int mass;
 	int number;
-	Animation anim;
 	void setNumber(int n);
 };
 
@@ -44,11 +40,12 @@ class Hole : public Form
 public:
 	Point position;
 	double radius;
-	Hole();
+	Hole(Point p, double r);
 	~Hole();
 	void setPosition(Point p);
 	Point getPosition();
 	void render();
+	void update(Form* h);
 };
 
 class Cushion : public Form
@@ -60,12 +57,16 @@ public:
 	float getAbsCoeff();
 	void setPosition(Point p);
 	Point getPosition();
+	void setDirector(Vector d);
+	Vector getDirector();
 	void setSize(Size s);
 	Size getSize();
 	void render();
+	void update(Form* h);
 protected:
 	float absorption_coeff;
 	Point position;
+	Vector director;
 	Size size;
 private:
 };
@@ -80,7 +81,7 @@ public:
 	float getFricCoeff();
 	void setSize(Size s);
 	Size getSize();
-	void setCue();
+	/*void setCue();
 	Cue* getCue();
 	void addBall(Ball b);
 	void removeBall(Ball b);
@@ -92,9 +93,13 @@ public:
 	void addHole(Hole h);
 	void addHole(Point P, double radius);
 	void clearHoles();
-	Hole** getHole();
+	Hole** getHole();*/
+	Form** getForms();
+	int addForm(Form* f);
+	void removeForm(Form* f);
+	void clearForms();
 	void render();
-	void update();
+	void update(Form* h);
 protected:
 	const static unsigned short NB_OF_BALLS = 16;
 	const static unsigned short NB_OF_CUSHIONS = 6;
@@ -102,10 +107,11 @@ protected:
 	float friction_coeff;
 	Point position;
 	Size size;
-	Cue* cue;
+	/*Cue* cue;
 	Ball* balls[NB_OF_BALLS];
 	Cushion* cushions[NB_OF_CUSHIONS];
-	Hole* holes[NB_OF_HOLES];
+	Hole* holes[NB_OF_HOLES];*/
+	Form* forms[50];
 	void setBalls(Ball* b[NB_OF_BALLS]);
 	void setCushions(Cushion* c[NB_OF_CUSHIONS]);
 	void setHoles(Hole* h[NB_OF_HOLES]);

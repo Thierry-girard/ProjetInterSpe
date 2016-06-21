@@ -1,4 +1,5 @@
 #include "master.h"
+#include <typeinfo>
 
 
 
@@ -18,11 +19,9 @@ void Cushion::setSize(Size s) {
 }
 
 
-
 Size Cushion::getSize() {
 	return size;
 }
-
 
 
 void Cushion::setPosition(Point p) {
@@ -30,11 +29,19 @@ void Cushion::setPosition(Point p) {
 }
 
 
-
 Point Cushion::getPosition() {
 	return position;
 }
 
+
+void Cushion::setDirector(Vector d) {
+	director = d;
+}
+
+
+Vector Cushion::getDirector() {
+	return director;
+}
 
 
 void Cushion::setAbsCoeff(float c) {
@@ -50,4 +57,11 @@ float Cushion::getAbsCoeff() {
 
 void Cushion::render() {
 
+}
+
+
+void Cushion::update(Form* f) {
+	if (typeid(f) == typeid(Ball)) {
+		// TODO BAPTDUPR
+	}
 }

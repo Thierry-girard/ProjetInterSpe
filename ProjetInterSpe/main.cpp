@@ -152,7 +152,7 @@ void update(Table * Table_Element)
 {
     // Update the table
     if (Table_Element != NULL) {
-        Table_Element->update();
+        Table_Element->update(NULL);
     }
 }
 

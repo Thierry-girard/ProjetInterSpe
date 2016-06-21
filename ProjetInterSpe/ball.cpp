@@ -1,5 +1,9 @@
 #include "master.h"
+#include <typeinfo>
 
+
+
+const double Ball::DEFAULT_RADIUS = 3.0;
 
 
 Ball::Ball(int n, GLchar* path) : Form(path)
@@ -91,13 +95,58 @@ void Ball::render() {
 }
 
 
-void Ball::setAnim(Animation a) {
-	anim = a;
-}
+void Ball::update(Form* f) {
+	{
+		if (typeid(f) == typeid(Hole)) {
+			if (distance(f->getAnim().getPosition(), this->getAnim().getPosition()) < this->getRadius()) {
+				//removeBall(balls[i]);
+			}
+		}
+	}
 
+	{
+		Vector Vector_tmp;
+		if (typeid(f) == typeid(Ball)) {
+			if (distance(this->getAnim().getPosition(), f->getAnim().getPosition()) < 2 * this->getRadius()) {
+				// Vector_tmp = balls[i]->getAnim().getVelocity();
+				// balls[j]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, Vector_tmp.z));
 
-Animation Ball::getAnim() {
-	return anim;
+				Vector_tmp = Vector(this->getAnim().getPosition(), f->getAnim().getPosition());
+				f->getAnim().setVelocity(0.2*Vector_tmp);
+			}
+		}
+	}
+
+	{
+		if (typeid(f) == typeid(Cushion)) {
+			// TODO BAPTDUPR
+			/*
+			if (balls[i]->getAnim().getPosition().x + balls[i]->getRadius() > size.x && balls[i]->getAnim().getVelocity().x > 0) {
+				Vector_tmp = balls[i]->getAnim().getVelocity();
+				balls[i]->getAnim().setVelocity(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
+			}
+
+			else if (balls[i]->getAnim().getPosition().x - balls[i]->getRadius() < 0 && balls[i]->getAnim().getVelocity().x < 0) {
+				Vector_tmp = balls[i]->getAnim().getVelocity();
+				balls[i]->getAnim().setVelocity(Vector(-Vector_tmp.x, 0, Vector_tmp.z));
+			}
+
+			else if (balls[i]->getAnim().getPosition().z + balls[i]->getRadius() > size.z && balls[i]->getAnim().getVelocity().z > 0) {
+				Vector_tmp = balls[i]->getAnim().getVelocity();
+				balls[i]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
+			}
+
+			else if (balls[i]->getAnim().getPosition().z - balls[i]->getRadius() < 0 && balls[i]->getAnim().getVelocity().z < 0) {
+				Vector_tmp = balls[i]->getAnim().getVelocity();
+				balls[i]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
+			}
+			
+			balls[i]->getAnim().setPosition(Point(balls[i]->getAnim().getPosition().x + balls[i]->getAnim().getVelocity().x, balls[i]->getAnim().getPosition().y + balls[i]->getAnim().getVelocity().y, balls[i]->getAnim().getPosition().z + balls[i]->getAnim().getVelocity().z));
+			*/
+
+			// RECOPIER DANS CUSHION::UPDATE
+		}
+	}
 }
 
 
