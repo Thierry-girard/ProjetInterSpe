@@ -32,7 +32,7 @@ void Hole::render() {
 
 
 void Hole::update(Form* f) {
-	if (typeid(f) == typeid(Ball)) {
+	if (typeid(*f) == typeid(Ball)) {
 		Ball* b = (Ball*)f;
 		if (distance(this->getAnim().getPosition(), f->getAnim().getPosition()) < b->getRadius()) {
 			//removeBall(balls[i]);

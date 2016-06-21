@@ -61,7 +61,7 @@ void Cushion::render() {
 
 
 void Cushion::update(Form* f) {
-	if (typeid(f) == typeid(Ball)) {
+	if (typeid(*f) == typeid(Ball)) {
 		// TODO BAPTDUPR
 	}
 }

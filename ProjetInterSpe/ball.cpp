@@ -97,7 +97,7 @@ void Ball::render() {
 
 void Ball::update(Form* f) {
 	{
-		if (typeid(f) == typeid(Hole)) {
+		if (typeid(*f) == typeid(Hole)) {
 			if (distance(f->getAnim().getPosition(), this->getAnim().getPosition()) < this->getRadius()) {
 				//removeBall(balls[i]);
 			}
@@ -106,7 +106,7 @@ void Ball::update(Form* f) {
 
 	{
 		Vector Vector_tmp;
-		if (typeid(f) == typeid(Ball)) {
+		if (typeid(*f) == typeid(Ball)) {
 			if (distance(this->getAnim().getPosition(), f->getAnim().getPosition()) < 2 * this->getRadius()) {
 				// Vector_tmp = balls[i]->getAnim().getVelocity();
 				// balls[j]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, Vector_tmp.z));
@@ -118,7 +118,7 @@ void Ball::update(Form* f) {
 	}
 
 	{
-		if (typeid(f) == typeid(Cushion)) {
+		if (typeid(*f) == typeid(Cushion)) {
 			// TODO BAPTDUPR
 			/*
 			if (balls[i]->getAnim().getPosition().x + balls[i]->getRadius() > size.x && balls[i]->getAnim().getVelocity().x > 0) {
