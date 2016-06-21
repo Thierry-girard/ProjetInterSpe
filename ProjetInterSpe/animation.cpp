@@ -55,9 +55,3 @@ void Animation::setRotation(Rotation r) {
 Rotation Animation::getRotation() {
 	return rotation;
 }
-
-
-void Animation::update()
-{
-
-}

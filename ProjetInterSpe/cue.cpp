@@ -20,11 +20,6 @@ void Cue::render()
 }
 
 
-void Cue::setAnim(Animation a) {
-	anim = a;
-}
-
-
-Animation Cue::getAnim() {
-	return anim;
+void Cue::update(Form* f) {
+	// TODO
 }
