@@ -238,3 +238,8 @@ paket-files/
 # JetBrains Rider
 .idea/
 *.sln.iml
+/Debug
+/ProjetInterSpe/Debug/table.obj.enc
+/ProjetInterSpe/resources/Thumbs.db
+/ProjetInterSpe/x64/Debug/ProjetInterSpe.tlog
+/ProjetInterSpe/x64/Debug/vc140.idb
