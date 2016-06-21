@@ -140,8 +140,6 @@ void Ball::update(Form* f) {
 				Vector_tmp = balls[i]->getAnim().getVelocity();
 				balls[i]->getAnim().setVelocity(Vector(Vector_tmp.x, 0, -Vector_tmp.z));
 			}
-			
-			balls[i]->getAnim().setPosition(Point(balls[i]->getAnim().getPosition().x + balls[i]->getAnim().getVelocity().x, balls[i]->getAnim().getPosition().y + balls[i]->getAnim().getVelocity().y, balls[i]->getAnim().getPosition().z + balls[i]->getAnim().getVelocity().z));
 			*/
 
 			// RECOPIER DANS CUSHION::UPDATE

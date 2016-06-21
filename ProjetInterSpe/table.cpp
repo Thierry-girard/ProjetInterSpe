@@ -621,6 +621,10 @@ void Table::update(Form* h) { // calcul des éléments physiques
 					forms[i]->update(forms[j]);
 				}
 			}
+
+			Animation a = forms[i]->getAnim();
+			a.setPosition(Point(forms[i]->getAnim().getPosition().x + forms[i]->getAnim().getVelocity().x, forms[i]->getAnim().getPosition().y + forms[i]->getAnim().getVelocity().y, forms[i]->getAnim().getPosition().z + forms[i]->getAnim().getVelocity().z));
+			forms[i]->setAnim(a);
 		}
 	}
 }
